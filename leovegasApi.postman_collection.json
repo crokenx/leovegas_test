@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "35e6d252-96f2-4c30-87c4-bbca1765b1a5",
+		"name": "leovegasApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "10288986"
+	},
+	"item": [
+		{
+			"name": "Admin | create admin user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Jesus\",\n  \"password\": \"secret_password\",\n  \"email\": \"validemail@gmail.com\",\n  \"role\": \"ADMIN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/users"
+			},
+			"response": []
+		},
+		{
+			"name": "User | create normal user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Jesus\",\n  \"password\": \"secret_password\",\n  \"email\": \"another@gmail.com\",\n  \"role\": \"USER\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Admin | list users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjE3LCJpYXQiOjE3MzIyNzgxMzAsImV4cCI6MTczMjMyMTMzMH0.ahAa_DmjyuCuXOWQ5y1S4EchOORT__Koh3TvV52TJc4",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:8080/api/v1/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Admin | get one user by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjE3LCJpYXQiOjE3MzIyNzgxMzAsImV4cCI6MTczMjMyMTMzMH0.ahAa_DmjyuCuXOWQ5y1S4EchOORT__Koh3TvV52TJc4",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:8080/api/v1/users/3"
+			},
+			"response": []
+		},
+		{
+			"name": "User | update properties",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjE4LCJpYXQiOjE3MzIyNzg3NDQsImV4cCI6MTczMjMyMTk0NH0.uKwn8LTyGBko9RLGr3s_av_rDW06-R2dVQCFdQnxzDA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"changing own name\",\n  \"password\": \"changing_password\",\n  \"email\": \"chaing_email@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/users/17"
+			},
+			"response": []
+		},
+		{
+			"name": "Admin | update properties",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjE3LCJpYXQiOjE3MzIyNzgxMzAsImV4cCI6MTczMjMyMTMzMH0.ahAa_DmjyuCuXOWQ5y1S4EchOORT__Koh3TvV52TJc4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"changing own name\",\n  \"password\": \"changing_password\",\n  \"email\": \"another_email_admin@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/users/17"
+			},
+			"response": []
+		},
+		{
+			"name": "Admin | delete user by id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjE3LCJpYXQiOjE3MzIyNzgxMzAsImV4cCI6MTczMjMyMTMzMH0.ahAa_DmjyuCuXOWQ5y1S4EchOORT__Koh3TvV52TJc4",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:8080/api/v1/users/11"
+			},
+			"response": []
+		}
+	]
+}
