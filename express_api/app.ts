@@ -11,4 +11,4 @@ app.use(express.json());
 // Routes
 app.use('/api/v1/users', usersRouter);
 
-app.listen(3000);
+export default app;

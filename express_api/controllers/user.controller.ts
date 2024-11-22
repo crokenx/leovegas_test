@@ -62,6 +62,7 @@ const createUser: RequestHandler = async(req: Request, res: Response): Promise<v
 
         delete user.dataValues.password;
 
+        res.status(201);
         res.json({
             ok: true,
             user: { ...user.toJSON() },
