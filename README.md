@@ -36,7 +36,7 @@ cd express_api/
 PORT=3000
 
 # Database variables
-DB_HOST='localhost'
+DB_HOST='leovegas-db'
 DB_USER='root'
 DB_PASSWORD='db_leovegas'
 DB_NAME='db_leovegas'
@@ -61,12 +61,21 @@ Here you will find a Dockerfile, please edit the Dockerfile if you want to chang
 
 ### 3. **Build and Run the Docker Containers**
 
+Now we will have to set up the containers.
 
-Now we will have to set up the containers. 
+### 3.1 **Create docker custom network**
+
+We should create a custom network to ensure that the containers can reach each other
+
+```bash
+sudo docker network create leovegas-net
+```
+
+If you change the name of the network "leovegas-net" to something else **you must update the .env file**
 
 ### 3.1 **Database container**
 
-If you did the step **2.2** you already shoud be in the dir to run the docker container for the database. If not please go to the **db** folder of the project.
+If you did the step **2.2** you already should be in the dir to run the docker container for the database. If not please go to the **db** folder of the project.
 
 Now run the following command on the terminal:
 
@@ -79,8 +88,12 @@ This will create the custom image of mysql that I did for this test, this image 
 Now run the following command to bring up the container with the database:
 
 ```bash
-sudo docker run -d -p 3306:3306 leovegasdb:v1
+sudo docker run --name leovegas-db -d -p 3306:3306 --network leovegas-net leovegasdb:v1
 ```
+
+If you change the name of container "leovegas-db" to something else **you must update the .env file**
+
+port argument is only necesary when we are in development environment.
 
 ### 3.2 **Application container**
 
@@ -89,7 +102,7 @@ Please move to the **express_api** folder, we will have to create the docker ima
 Now run the following command on the terminal:
 
 ```bash
-sudo docker build -t express-api:v1 . 
+sudo docker build -t express_api:v1 . 
 ```
 
 This will create a docker image of the application.
@@ -97,42 +110,42 @@ This will create a docker image of the application.
 Now run the following command to bring up the container with the application running:
 
 ```bash
-sudo docker run express-api:v1
+sudo docker run -p 8080:3000 --network leovegas-net express_api:v1
 ```
 
 ### 4 **You can now test the application with the following routes**
 
 ### 4.1 **Create admin user | Post request**
 
-http://localhost:3000/api/v1/users
+http://localhost:8080/api/v1/users
 
 ### 4.2 **Create normal user | Post request**
 
-http://localhost:3000/api/v1/users
+http://localhost:8080/api/v1/users
 
 ### 4.3 **Get list of users | Get request | must be admin user**
 
-http://localhost:3000/api/v1/users
+http://localhost:8080/api/v1/users
 
 ### 4.4 **Get own info normal user | Get request | must have and own valid access_token**
 
-http://localhost:3000/api/v1/users/10
+http://localhost:8080/api/v1/users/10
 
 ### 4.5 **Get anyone info | Get request | must be admin user | must have and own valid access_token**
 
-http://localhost:3000/api/v1/users/10
+http://localhost:8080/api/v1/users/10
 
 ### 4.6 **Update own info normal user | Put request | must have and own valid access_token**
 
-http://localhost:3000/api/v1/users/10
+http://localhost:8080/api/v1/users/10
 
 ### 4.7 **Update someone info admin user | Put request | must be admin user | must have and own valid access_token**
 
-http://localhost:3000/api/v1/users/10
+http://localhost:8080/api/v1/users/10
 
 ### 4.8 **Delete someone admin user | Delete request | must be admin user | must have and own valid access_token**
 
-http://localhost:3000/api/v1/users/10
+http://localhost:8080/api/v1/users/10
 
 ### **I will share through email a postman collection as well**
 

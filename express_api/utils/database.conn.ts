@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize';
 
 const sequelize = new Sequelize({
     dialect: 'mysql',
-    host: process.env.DB_HOST || 'localhost',
+    host: process.env.DB_HOST || 'leovegas-net',
     port: Number(process.env.DB_PORT) || 3306,
     username: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || 'db_leovegas',
