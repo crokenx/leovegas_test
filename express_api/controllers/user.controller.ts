@@ -36,7 +36,7 @@ const createUser: RequestHandler = async(req: Request, res: Response): Promise<v
         const existingEmail = await User.findOne({ where: { email } });
 
         if (existingEmail) {
-            res.status(400).json({
+            res.status(409).json({
                 ok: false,
                 msg: 'Email already registered'
             });
@@ -45,20 +45,17 @@ const createUser: RequestHandler = async(req: Request, res: Response): Promise<v
 
         const user = new User({
             name, email, password, role,
-            access_token: '' // Initialize access_token as empty is requirement
+            access_token: ''
         });
-    
-        // Encrypt password
+
         const salt = bcrypt.genSaltSync();
         user.get().password = bcrypt.hashSync(password, salt);
-    
-        // Save user
+
         await user.save();
 
-        // Generate TOKEN - JWT
         const token = await generateJWT(user.toJSON().id);
 
-        await user.update({ access_token: token});
+        await user.update({ access_token: token });
 
         delete user.dataValues.password;
 
@@ -108,8 +105,8 @@ const updateUser: RequestHandler = async (req: AuthenticatedRequest, res: Respon
 
         if (email && userDB!.get().email !== email ) {
             const emailExist = await User.findOne({ where: { email } });
-            if ( emailExist ) {
-                res.status(400).json({
+            if (emailExist) {
+                res.status(409).json({
                     ok: false,
                     msg: 'Email already taken'
                 });

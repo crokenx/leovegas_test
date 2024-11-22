@@ -7,7 +7,7 @@ import { avoidSelfDestruction } from 'middlewares';
 const usersRouter = Router();
 
 usersRouter.get('/', validateJWT, validateAdminRole, getUsers);
-usersRouter.get('/user/:id', validateJWT, validateAdminRoleSelfUser, getUser);
+usersRouter.get('/:id', validateJWT, validateAdminRoleSelfUser, getUser);
 
 usersRouter.post( '/',
     [

@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest --coverage",
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
-    "start": "node dist/app.js",
-    "dev": "nodemon -r tsconfig-paths/register app.ts"
+    "start": "nodemon -r tsconfig-paths/register server.ts",
+    "dev": "nodemon -r tsconfig-paths/register server.ts"
   },
   "author": "crokenx",
   "license": "ISC",
